@@ -68,11 +68,9 @@ def sendMention(to, text="", mids=[]):
     cl.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)
 def helpmessage():
     helpMessage = """╔═══════════
-╠♥ ✿✿✿ 喵の單體半垢 ✿✿✿ ♥
-╠═✪〘 owners專用 〙✪═
-╠✪〘 Help 〙✪═════
-╠➥ Help 查看指令
-╠✪〘 Status 〙✪════
+╠測試半垢
+╠ Help 查看指令
+╠〘 狀態 〙
 ╠➥ Restart 重新啟動
 ╠➥ Save 儲存設定
 ╠➥ Runtime 運作時間
@@ -133,7 +131,7 @@ def helpmessage():
 ╠➥ Timenow 現在時刻
 ╠➥ Tag @ [times] 重複標人
 ╠➥ Reply_text_reply 關鍵字回覆
-╚═〘 Created By: 蘿莉喵™ 〙"""
+╚═
     return helpMessage
 wait = {
     "ban":False,
@@ -150,7 +148,7 @@ wait2 = {
 }
 setTime = {}
 setTime = wait2['setTime']
-owners=["ua10c2ad470b4b6e972954e1140ad1891","u0505fe1fb484fc1537d12ad53a5a4ea2","uc338f8ef91292e65aea28feb5002d0f3","u992a6e77041a772b8abd613ea64d4623",clMID]
+owners=["uec6d62c3e4a61f033332bc1d86133e49",clMID]
 
 #==============================================================================#
 def lineBot(op):
@@ -160,11 +158,11 @@ def lineBot(op):
         if op.type == 5:
             if settings["autoAdd"] == True:
                 cl.findAndAddContactsByMid(op.param1)
-                sendMention(op.param1, " @! 感謝您加我為好友",[op.param1])
+                sendMention(op.param1, " @! 感謝加本機為好友",[op.param1])
         if op.type == 11:
             G = cl.getGroup(op.param1)
             if op.param1 in settings["mention"]:
-                sendMention(op.param1, " @! 更改群組設定",[op.param2])
+                sendMention(op.param1, " @! 變更群組設定",[op.param2])
             if op.param1 in settings["qrprotect"] and op.param3 == '4':
                 if op.param2 in ban["admin"] or op.param2 in owners:
                     pass
@@ -211,7 +209,7 @@ def lineBot(op):
             if op.param1 in settings["mention"]:
                 chiya=[op.param2]
                 chiya.append(op.param3)
-                sendMention(op.param1,"警告!! @! 踢了 @! ", chiya)
+                sendMention(op.param1,"注意 @! 踢掉了 @! ", chiya)
             if op.param2 in ban["admin"] or op.param2 in ban["bots"] or op.param2 in owners:
                 pass
             elif op.param3 in owners:
@@ -248,7 +246,7 @@ def lineBot(op):
                     ret_ = "╔══[ 關於使用者 ]"
                     ret_ += "\n╠ 使用者名稱 : {}".format(cl.getContact(sender).displayName)
                     if sender in cl.getAllContactIds():ret_ += "\n╠ 與本帳關係 : 好友"
-                    elif sender in cl.getBlockedContactIds():ret_ += "\n╠ 與本帳關係 : phon swo"
+                    elif sender in cl.getBlockedContactIds():ret_ += "\n╠ 與本帳關係 : ?"
                     else:ret_ += "\n╠ 與本帳關係 : 普通"
                     if sender in owners:ret_ += "\n╠ 使用者權限 : 最高(擁有者)"
                     elif sender in ban["admin"]:ret_ += "\n╠ 使用者權限 : 部分(權限者)"
@@ -267,7 +265,7 @@ def lineBot(op):
                     helpMessage = helpmessage()
                     cl.sendMessage(to, str(helpMessage))
                 elif text.lower() in ['speed','sp']:
-                    cl.sendMessage(to,"小喵極緩慢的測速中...\n結果約為"+str(timeit.timeit('"-".join(str(n) for n in range(100))',number=1000)) + "秒")
+                    cl.sendMessage(to,"努力測速中...\n結果約為"+str(timeit.timeit('"-".join(str(n) for n in range(100))',number=1000)) + "秒")
                 elif text.lower() == 'save':
                     backupData()
                     cl.sendMessage(to,"儲存設定成功!")
